@@ -1,4 +1,4 @@
-import { useSelector, useDispatch  } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { getContacts } from 'redux/contacts/contacts-selectors';
 import { fetchContacts } from 'redux/contacts/contact-operations';
@@ -17,8 +17,6 @@ function App() {
   useEffect(() => {
     dispatch(fetchContacts());
   }, [dispatch]);
-
-  console.log(contacts);
 
   return (
     <div className={css.phonebookContainer}>
