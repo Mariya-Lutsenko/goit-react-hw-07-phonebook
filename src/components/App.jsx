@@ -1,5 +1,7 @@
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch  } from 'react-redux';
+import { useEffect } from 'react';
 import { getContacts } from 'redux/contacts/contacts-selectors';
+import { fetchContacts } from 'redux/contacts/contact-operations';
 
 import css from './App.module.css';
 import ContactForm from './ContactForm';
@@ -10,6 +12,13 @@ import Notification from './Notification';
 function App() {
   const contacts = useSelector(getContacts);
   const isContacts = Boolean(contacts.length);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchContacts());
+  }, [dispatch]);
+
+  console.log(contacts);
 
   return (
     <div className={css.phonebookContainer}>

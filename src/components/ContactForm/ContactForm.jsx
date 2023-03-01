@@ -1,6 +1,6 @@
-import { useState } from 'react';
+import {  useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { addContact } from 'redux/contacts/contacts-slice';
+import { addContact } from 'redux/contacts/contact-operations';
 import { getContacts } from 'redux/contacts/contacts-selectors';
 import { Notify } from 'notiflix';
 import css from './ContactForm.module.css';
@@ -10,6 +10,8 @@ const ContactForm = () => {
   const [number, setNumber] = useState('');
   const contacts = useSelector(getContacts);
   const dispatch = useDispatch();
+
+
 
   const handleChange = event => {
     const { name, value } = event.currentTarget;
