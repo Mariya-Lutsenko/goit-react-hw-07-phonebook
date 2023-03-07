@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
-import { getContacts } from 'redux/contacts/contacts-selectors';
+import { getContacts, getIsLoading } from 'redux/contacts/contacts-selectors';
 import { fetchContacts } from 'redux/contacts/contact-operations';
 
 import css from './App.module.css';
@@ -8,17 +8,23 @@ import ContactForm from './ContactForm';
 import ContactList from './ContactList';
 import Filter from './Filter';
 import Notification from './Notification';
+import Loader from './Loader/Loader';
 
 function App() {
   const contacts = useSelector(getContacts);
   const isContacts = Boolean(contacts.length);
+  const loading = useSelector(getIsLoading);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(fetchContacts());
   }, [dispatch]);
 
+  console.log(loading);
+
   return (
+  <div>
+    {loading && <Loader/>}
     <div className={css.phonebookContainer}>
       <h1 className={css.titlePhonebook}>Phonebook</h1>
       <ContactForm />
@@ -33,6 +39,7 @@ function App() {
       ) : (
         <Notification message="Contact list is empty" />
       )}
+    </div>
     </div>
   );
 }
